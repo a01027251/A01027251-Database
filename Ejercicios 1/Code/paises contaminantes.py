@@ -10,7 +10,7 @@ select_year=clean.loc[clean["year"]==2010]
 
 top5sum=select_year.groupby(by=['country_or_area','year']).sum()
 
-top5dup=top5sum.sort_values(by = "value", ascending = True)
+top5dup=top5sum.sort_values(by = "value", ascending = False)
 
 
 print(top5sum.tail(5))
