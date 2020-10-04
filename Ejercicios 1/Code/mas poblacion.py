@@ -1,16 +1,13 @@
-import pandas as pd
+import csv
+poblacion = [ ]
+eliminar = ["--", "NA"]
 
-population = pd.read_csv("/Users/jorgebecker/Desktop/A01027251-Database/Ejercicios 1/TextFiles/populationbycountry19802010millions.csv")
+with open("/Users/jorgebecker/Desktop/A01027251-Database/Ejercicios 1/TextFiles/populationbycountry19802010millions.csv") as archivo:
+    archivo_leido = csv.reader(archivo)
 
+    for row in archivo_leido:
+        if row[-1] not in eliminar:
+            poblacion.append([float(row[-1]), row[0]])
 
-clean=population[["Country","2010"]]
-
-clean['2010'].replace('--','')
-
-
-
-
-top5=clean.sort_values(by='2010',ascending=False)
-
-
-print(top5.head(5))
+poblacion.sort(reverse=True)
+print(poblacion[:5])
