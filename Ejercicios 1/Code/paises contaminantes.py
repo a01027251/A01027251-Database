@@ -1,7 +1,7 @@
 import pandas as pd
 
 population = pd.read_csv("/Users/jorgebecker/Desktop/A01027251-Database/Ejercicios 1/TextFiles/greenhouse_gas_inventory_data_data.csv")
-
+print(population.describe())
 clean=population[["country_or_area","year","value"]]
 
 
