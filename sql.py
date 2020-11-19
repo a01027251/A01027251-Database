@@ -1,7 +1,7 @@
 import mysql.connector
 
 try:
-    cnx = mysql.connector.connect(user='root', password='Poncho0123-', host='127.0.0.1', database='iot')
+    cnx = mysql.connector.connect(user='root', password='Poncho0123-', host='127.0.0.1', database='')
     cursor = cnx.cursor()
 
     query_data = (3,)
