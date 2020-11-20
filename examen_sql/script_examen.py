@@ -13,34 +13,39 @@ def crearAutor(cnx, cursor):
     cursor.execute(query, query_data)
     cnx.commit()
 
+
 def randomString(longitud):
-    letters=string.ascii_lowercase
-    result_str="".join(random.choice(letters) for i in range (longitud) )
-    result_comillas="'"+result_str+"'"
+    letters = string.ascii_lowercase
+    result_str = "".join(random.choice(letters) for i in range(longitud))
+    result_comillas = "'"+result_str+"'"
     return result_comillas
 
+
 def randomDate():
-    year=random.randint(1950,2020)
-    month=random.randint(1,12)
-    day=random.randint(1,30)
-    combine="'"+str(year)+"-"+str(month)+"-"+str(day)+"'"
+    year = random.randint(1950, 2020)
+    month = random.randint(1, 12)
+    day = random.randint(1, 30)
+    combine = "'"+str(year)+"-"+str(month)+"-"+str(day)+"'"
     return combine
 
+
 def randomFloat():
-    number=random.uniform(1,100)
-    roundNumber=round(number,2)
+    number = random.uniform(1, 100)
+    roundNumber = round(number, 2)
     return roundNumber
 
 
-
 try:
-    cnx = mysql.connector.connect(
-        user='root', password='Poncho0123-', host='127.0.0.1', database='examen_sql')
+    cnx = mysql.connector.connect(user='root', password='Poncho0123-', host='127.0.0.1', database='examen_sql')
     cursor = cnx.cursor()
     system('clear')
     print("1) Insertar autor")
     print("2) Generar 100 libros")
     print("3) Generar tags")
+    print("4) Convinar id_tag con id_libro")
+    print("5) Combinar id_autor con id_libro")
+    print("0) Salir de la base de datos")
+    print()
     seleccion = int(input("Que deseas hacer:"))
 
     if (seleccion == 1):
@@ -54,13 +59,30 @@ try:
             query = f"INSERT INTO Libros(id_libro, titulo, fecha_publicacion, precio) values("+str(j+1)+", "+randomString(8)+", "+randomDate()+", "+str(randomFloat())+");"
             cursor.execute(query)
             cnx.commit()
-    
+
     if (seleccion == 3):
         cantidad = int(input("Cuantos tags quieres generar? "))
         for j in range(cantidad):
-                query = f"INSERT INTO Tags(tag) values("+randomString(8)+");"
+            query = f"INSERT INTO Tags(tag) values("+randomString(8)+");"
+            cursor.execute(query)
+            cnx.commit()
+
+    if (seleccion == 4):
+        for i in range(100):
+            query = f"INSERT INTO libros_tags(id_libro,id_tag) values("+str(i+1)+", "+ str(random.randint(1, 10))+");"
+            cursor.execute(query)
+            cnx.commit()
+    
+    if (seleccion == 5):
+
+            for i in range(100):
+                query = f"INSERT INTO libros_autores(id_libro,id_autor) values("+str(i+1)+", "+ str(random.randint(1, 10))+");"
                 cursor.execute(query)
                 cnx.commit()
+
+    if (seleccion == 0):
+        print("Saliendo de la base de datos...")
+        
 
     for result in cursor:
         print(result)
