@@ -44,6 +44,8 @@ try:
     print("3) Generar tags")
     print("4) Convinar id_tag con id_libro")
     print("5) Combinar id_autor con id_libro")
+    print("6) QUERY para  cada vista")
+
     print("0) Salir de la base de datos")
     print()
     seleccion = int(input("Que deseas hacer:"))
@@ -79,6 +81,13 @@ try:
                 query = f"INSERT INTO libros_autores(id_libro,id_autor) values("+str(i+1)+", "+ str(random.randint(1, 10))+");"
                 cursor.execute(query)
                 cnx.commit()
+
+    if (seleccion == 6):
+        print("select * from titulo_autor_fecha;")
+        print("select * from titulo_tag_precio")
+        print("select * from titulo_autor_tag")
+
+
 
     if (seleccion == 0):
         print("Saliendo de la base de datos...")
