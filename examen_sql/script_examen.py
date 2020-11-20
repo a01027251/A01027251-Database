@@ -36,7 +36,7 @@ def randomFloat():
 
 
 try:
-    cnx = mysql.connector.connect(user='root', password='Poncho0123-', host='127.0.0.1', database='examen_sql')
+    cnx = mysql.connector.connect(user='root', password='#insert#', host='127.0.0.1', database='examen_sql')
     cursor = cnx.cursor()
     system('clear')
     print("1) Insertar autor")
